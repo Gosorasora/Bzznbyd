@@ -105,6 +105,7 @@ const resolvers = {
         date
       });
 
+      //요구사항 : 삭제된 데이터 응답으로 보여줄 것 
       return deleted;
     }
   }
