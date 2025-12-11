@@ -14,7 +14,7 @@ const ExchangeRate = mongoose.model('ExchangeRate', exchangeRateSchema);
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI); //env로 처리 
     console.log('MongoDB 연결 성공');
   } catch (error) {
     console.error('MongoDB 연결 실패:', error.message);

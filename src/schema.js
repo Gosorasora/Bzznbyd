@@ -1,3 +1,4 @@
+// 제공된 스키마 그대로 사용 
 const typeDefs = `#graphql
   "환율정보"
   type ExchangeInfo {
@@ -46,4 +47,4 @@ const typeDefs = `#graphql
   }
 `;
 
-module.exports = typeDefs;
+module.exports = typeDefs; //json 파일 내보내기 

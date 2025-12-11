@@ -1,4 +1,4 @@
-# Dependencies
+# Dependencies 
 node_modules/
 
 # Environment
@@ -31,3 +31,6 @@ coverage/
 # Misc
 *.tmp
 *.temp
+
+# Documentation (private)
+docs/
