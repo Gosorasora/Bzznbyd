@@ -65,12 +65,7 @@ const resolvers = {
 
       // 같은 통화끼리는 항상 rate 1로 저장
       // === type 까지 비교
-      let finalRate;
-      if (srcLower === tgtLower) {
-        const finalRate = 1;
-      } else {
-        const finalRate = rate;
-      }
+      const finalRate = srcLower === tgtLower ? 1 : rate;
 
       const result = await ExchangeRate.findOneAndUpdate(
         { src: srcLower, tgt: tgtLower, date: targetDate }, //찾는 조건
@@ -87,23 +82,21 @@ const resolvers = {
       const srcLower = src.toLowerCase();
       const tgtLower = tgt.toLowerCase();
 
-      // 같은 통화끼리 삭제 요청시 rate 1로 응답
-      if (srcLower === tgtLower) {
-        // Test를 위한 더미데이터 생성 -> 데이터가 없을 때 삭제할 경우 
-        await ExchangeRate.findOneAndDelete({ src: srcLower, tgt: tgtLower, date });
-        return {
-          src: srcLower,
-          tgt: tgtLower,
-          rate: 1,
-          date
-        };
-      }
-
       const deleted = await ExchangeRate.findOneAndDelete({
         src: srcLower,
         tgt: tgtLower,
         date
       });
+
+      // 삭제할 데이터가 없는 경우 에러
+      if (!deleted) {
+        throw new Error(`환율 데이터를 찾을 수 없습니다: ${srcLower} → ${tgtLower}, ${date}`);
+      }
+
+      // 같은 통화끼리는 rate 1로 응답
+      if (srcLower === tgtLower) {
+        return { src: srcLower, tgt: tgtLower, rate: 1, date };
+      }
 
       //요구사항 : 삭제된 데이터 응답으로 보여줄 것 
       return deleted;
