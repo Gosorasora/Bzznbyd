@@ -28,16 +28,9 @@ cd Bzznbyd/exchange-rate-api
 npm install
 ```
 
-### 3. 환경변수 설정
+### 3. MongoDB 실행
 
-`.env` 파일 생성:
-
-```env
-MONGODB_URI=mongodb://localhost:27017/exchange_rate
-PORT=5110
-```
-
-### 4. MongoDB 실행
+- env 사용시 별도로 설정을 해줘야하기에 env파일은 사용하지 않게 했습니다.
 
 ```bash
 # macOS (Homebrew)
@@ -47,7 +40,7 @@ brew services start mongodb/brew/mongodb-community@7.0
 docker run -d -p 27017:27017 --name mongodb mongo:latest
 ```
 
-### 5. 서버 실행
+### 4. 서버 실행
 
 ```bash
 npm start
@@ -96,6 +89,5 @@ exchange-rate-api/
 │   ├── schema.js     # GraphQL 스키마
 │   ├── resolvers.js  # 비즈니스 로직
 │   └── db.js         # MongoDB 연결
-├── package.json
-└── .env
+└── package.json
 ```
